@@ -54,13 +54,27 @@ class FileManageHelper {
     func readFile(filename: String, type: String) -> String {
         let realFileName = "\(filename).\(type)"
         let fileURLProject = getDocumentDirectoryPath()
-            
-            let fileURL = fileURLProject.appendingPathComponent(realFileName)
+        
+        let fileURL = fileURLProject.appendingPathComponent(realFileName)
+        
+        do {
+            let fileContentsAsString = try String(contentsOf: fileURL, encoding: .utf8)
+            return fileContentsAsString
+        } catch { fatalError("no file") }
+    }
     
-        // guard let fileContents = useFileHandler.contents(atPath: fileURLProject ?? "") else { return "" }
+    func removeFile(fileName: String, fileType: String) {
+        let fileNameWithPath: String = "\(fileName).\(fileType)"
+        let filePath = getDocumentDirectoryPath()
+        let fileUrl = filePath.appendingPathComponent(fileNameWithPath)
+        if useFileHandler.fileExists(atPath: fileUrl.path) {
             do {
-                let fileContentsAsString = try String(contentsOf: fileURL, encoding: .utf8)
-                return fileContentsAsString
-            } catch { fatalError("no file") }
+                try useFileHandler.removeItem(at: fileUrl)
+            } catch {
+                print(error)
+            }
+        } else {
+            print("File is not existed")
+        }
     }
 }
