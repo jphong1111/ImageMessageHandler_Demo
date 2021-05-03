@@ -2,4 +2,4 @@
 
 This Demo App is using Image and Message Handler
 
-<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" width="40" height="40" />
+<img src="https://github.com/jphong1111/ImageMessageHandler_DemoApp/blob/main/Image/record.gif" />
